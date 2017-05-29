@@ -38,6 +38,7 @@ void main()
 	std::uniform_real_distribution<> dis(0, 1);
 	vector<vector<Cell>> InitialGrid;
 	vector<vector<Cell>> SumGrid;
+	
 	InitialGrid.resize(x);
 	SumGrid.resize(x);
 
@@ -127,4 +128,5 @@ void main()
 	cout << "there are " << whiteSquare.quantity << " squares of the size " << whiteSquare.size;
 	cin.get();
 	cin.get();
+
 }
