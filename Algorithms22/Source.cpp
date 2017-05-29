@@ -1,4 +1,4 @@
-﻿#line 1 "Code.txt"
+﻿// thanks for finally allowing visual studio 2015, finally a decent support for lambdas and autos
 
 #include <iostream>
 #include <random>
@@ -13,12 +13,13 @@
 #define in :
 #define var auto&
 
-
 using namespace std;
 struct Cell3 {
 private:
 	int Val;
 public:
+	Cell3(int value) { this->Val = value; }
+	Cell3() : Val(0) {}
 	int& operator()() { return this->Val; }
 	operator int() const{ return this->Val; }
 };
@@ -50,16 +51,47 @@ void main()
 	{
 		line.resize(y);
 	}
-#define Stringize(Variable, ...) #Variable##__VA_ARGS__
-	cout << Stringize(InitialGrid, ":\n");
-	for (var line in InitialGrid)
+	int Input;
+	cout << "enter 0 if you want generated problem, 1 if you want the default problem \n";
+	cin >> Input;
+	if (Input == 0)
 	{
-		for (var cell in line)
+#define Stringize(Variable, ...) #Variable##__VA_ARGS__
+		cout << Stringize(InitialGrid, ":\n");
+		for (var line in InitialGrid)
 		{
-			cell() = (int)(dis(gen)+0.5f);
-			cout << ((cell == 1)?"[-]  ":" -   ");
+			for (var cell in line)
+			{
+				cell() = (int)(dis(gen) + 0.5f);
+				cout << ((cell == 1) ? "[-]  " : " -   ");
+			}
+			cout << endl;
 		}
-		cout << endl;
+	}
+	else if (Input == 1)
+	{
+		InitialGrid[0] = {1,0,1,0,1,0,1,0,1,0};
+		InitialGrid[1] = {1,0,1,0,1,0,1,0,1,0};
+		InitialGrid[2] = {1,0,1,0,1,0,1,0,1,0};
+		InitialGrid[3] = {1,0,1,0,1,0,1,0,1,0};
+		InitialGrid[4] = {1,0,1,0,1,0,1,0,1,0};
+#define Stringize(Variable, ...) #Variable##__VA_ARGS__
+		cout << Stringize(InitialGrid, ":\n");
+		for (var line in InitialGrid)
+		{
+			for (var cell in line)
+			{
+				cout << ((cell == 1) ? "[-]  " : " -   ");
+			}
+			cout << endl;
+		}
+	}
+	else
+	{
+		cout << "I'm not gonna try if you're not gonna try, restart the program.";
+		cin.get();
+		cin.get();
+		exit(0);
 	}
 	struct WhiteSquare {
 		WhiteSquare() : size(0), quantity(0) {}

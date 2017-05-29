@@ -20,22 +20,39 @@ void main()
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_real_distribution<> dis(1, 100);
+	std::uniform_real_distribution<> disHouses(3, 15);
 	vector<Cost> Houses[3];
 	vector<Cost> ProcessedHouses[3];
-	/*for (int i = 0; i < 3; i++)
+	int Input;
+	cout << "enter 0 if you want generated problem, 1 if you want the default problem \n";
+	cin >> Input;
+	if (Input == 0)
 	{
-		Houses[i].resize(numHouses);
-		ProcessedHouses[i].resize(numHouses);
-		for (auto& val : Houses[i])
+		numHouses = (int)disHouses(gen);
+		for (int i = 0; i < 3; i++)
 		{
-			val = (int)dis(gen);
-			PrintSpaced(val, 4);
+			Houses[i].resize(numHouses);
+			ProcessedHouses[i].resize(numHouses);
+			for (auto& val : Houses[i])
+			{
+				val = (int)dis(gen);
+			}
 		}
-		cout << endl;
-	}*/
-	Houses[0] = {1,1  ,1,1};
-	Houses[1] = {2,100,2,100};
-	Houses[2] = {3,100,3,8};
+
+	}
+	/****/
+	else if (Input == 1)
+	{
+		Houses[0] = { 1,1  ,1,1  };
+		Houses[1] = { 2,100,2,100};
+		Houses[2] = { 3,100,3,8  };
+	}
+	else {
+		cout << "I'm not gonna try if you're not gonna try, restart the program.";
+		cin.get();
+		cin.get();
+		exit(0);
+	}
 	for (int i = 0; i < 3; i++)
 	{
 		for (auto& val : Houses[i])
